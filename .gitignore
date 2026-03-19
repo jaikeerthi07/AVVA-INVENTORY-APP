@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+dist/
+build/
+.npm
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+ENV/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Environment variables
+.env
+
+# System artifacts
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/
+brain/
