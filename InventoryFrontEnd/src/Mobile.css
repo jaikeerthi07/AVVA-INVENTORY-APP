@@ -1,0 +1,116 @@
+/* Mobile Optimization CSS */
+
+@media (max-width: 768px) {
+  /* Hide text labels in sidebar when collapsed or on mobile by default */
+  .sidebar-mobile-hidden {
+    display: none !important;
+  }
+
+  /* Main content should take full width on mobile */
+  .content-mobile {
+    margin-left: 0 !important;
+    padding: 70px 10px 10px 10px !important;
+  }
+
+  /* Mobile Sidebar Overlay */
+  .sidebar-mobile {
+    position: fixed !important;
+    left: -240px !important; /* Start off-screen */
+    top: 65px !important;
+    width: 240px !important;
+    height: calc(100vh - 65px) !important;
+    z-index: 3000 !important;
+    transition: left 0.3s ease-in-out !important;
+  }
+
+  .sidebar-mobile.open {
+    left: 0 !important;
+  }
+
+  /* Backdrop for mobile sidebar */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    z-index: 2500;
+    cursor: pointer;
+  }
+
+  /* Header adjustments */
+  .header-mobile {
+    padding: 0 10px !important;
+  }
+
+  .header-title-mobile {
+    font-size: 16px !important;
+  }
+
+  .user-section-mobile {
+    display: none !important; /* Hide on very small screens or simplify */
+  }
+
+  .logout-btn-mobile {
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+  }
+
+  /* Login Page Responsive */
+  .login-container-mobile {
+    padding: 20px !important;
+  }
+
+  .login-form-mobile {
+    width: 90% !important;
+    max-width: 400px !important;
+    padding: 25px !important;
+  }
+
+  /* Dashboard Cards */
+  .dashboard-grid-mobile {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+
+  /* Tables horizontal scroll indicators */
+  .table-container-mobile {
+    overflow-x: auto !important;
+    box-shadow: inset -10px 0 10px -10px rgba(0,0,0,0.5); /* Shadow on the right to indicate scroll */
+    margin-bottom: 20px;
+    background: #1f2937;
+    border-radius: 8px;
+  }
+
+  /* Custom scrollbar for mobile tables */
+  .table-container-mobile::-webkit-scrollbar {
+    height: 4px;
+  }
+  .table-container-mobile::-webkit-scrollbar-thumb {
+    background: rgba(77, 166, 255, 0.4);
+    border-radius: 4px;
+  }
+
+  /* Adjust Bill search results for mobile */
+  .search-results-mobile {
+    width: calc(100vw - 40px) !important;
+    left: 20px !important;
+  }
+
+  /* Small screen font optimizations */
+  body {
+    font-size: 14px;
+  }
+
+  /* Form spacing on mobile */
+  input, select, button {
+    min-height: 44px; /* Better hit area for mobile */
+  }
+
+  .no-print {
+    margin-bottom: 20px;
+  }
+}

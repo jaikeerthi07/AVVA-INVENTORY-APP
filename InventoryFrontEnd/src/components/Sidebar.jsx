@@ -1,0 +1,246 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  FaTachometerAlt,
+  FaBoxOpen,
+  FaFileInvoice,
+  FaFileAlt,
+  FaTruck,
+  FaList,
+  FaArrowDown,
+  FaTags,
+  FaExclamationTriangle,
+  FaArrowUp,
+  FaClipboardList,
+  FaFileInvoiceDollar,
+  FaUsers,
+  FaBoxes,
+  FaShoppingCart,
+} from "react-icons/fa";
+
+const Sidebar = ({ isOpen, isMobile }) => {
+  const HEADER_HEIGHT = "65px";
+
+  const styles = {
+    sidebar: {
+      width: isOpen ? "230px" : "60px",
+      height: `calc(100vh - ${HEADER_HEIGHT})`,
+      background: "linear-gradient(180deg, #111827, #0f172a)",
+      color: "#fff",
+      padding: "20px 8px",
+      position: "fixed",
+      top: HEADER_HEIGHT,
+      left: 0,
+      transition: "all 0.3s ease",
+      overflowY: "auto",
+      overflowX: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      boxShadow: "4px 0 20px rgba(0,0,0,0.4)",
+      scrollbarWidth: "thin",
+      scrollbarColor: "#4da6ff #1f2937",
+    },
+
+    logoSection: {
+      marginBottom: "25px",
+      fontSize: isOpen ? "18px" : "14px",
+      fontWeight: "600",
+      letterSpacing: "1px",
+      textAlign: "center",
+      padding: "8px 4px",
+      color: "#4da6ff",
+      borderBottom: "1px solid rgba(77, 166, 255, 0.2)",
+      whiteSpace: "nowrap",
+      transition: "all 0.3s ease",
+    },
+
+    navContainer: {
+      display: "flex",
+      flexDirection: "column",
+      gap: "4px",
+      flex: 1,
+    },
+
+    link: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: isOpen ? "flex-start" : "center",
+      gap: "12px",
+      padding: "10px 12px",
+      color: "#9ca3af",
+      textDecoration: "none",
+      borderRadius: "8px",
+      transition: "all 0.2s ease",
+      fontSize: "14px",
+      fontWeight: "500",
+      whiteSpace: "nowrap",
+      minHeight: "40px",
+    },
+
+    activeLink: {
+      background: "rgba(77, 166, 255, 0.15)",
+      color: "#4da6ff",
+    },
+
+    icon: {
+      fontSize: "18px",
+      minWidth: "20px",
+    },
+
+    text: {
+      display: isOpen ? "inline" : "none",
+      opacity: isOpen ? 1 : 0,
+      transition: "opacity 0.2s ease",
+    },
+
+    divider: {
+      height: "1px",
+      background: "rgba(255,255,255,0.1)",
+      margin: "12px 0",
+    },
+
+    sectionTitle: {
+      fontSize: "11px",
+      fontWeight: "600",
+      textTransform: "uppercase",
+      letterSpacing: "0.5px",
+      color: "#6b7280",
+      padding: "8px 12px 4px",
+      display: isOpen ? "block" : "none",
+    },
+  };
+
+  // Custom scrollbar styles for webkit browsers
+  const scrollbarStyles = `
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar::-webkit-scrollbar-track {
+      background: #1f2937;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background: #4da6ff;
+      border-radius: 4px;
+    }
+    .sidebar::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
+  `;
+
+  const getLinkStyle = ({ isActive }) =>
+    isActive
+      ? { ...styles.link, ...styles.activeLink }
+      : styles.link;
+
+  return (
+    <>
+      <style>{scrollbarStyles}</style>
+      <div 
+        style={styles.sidebar} 
+        className={`sidebar ${isMobile ? 'sidebar-mobile' : ''} ${isOpen ? 'open' : ''}`}
+      >
+        <div style={styles.logoSection}>
+          {isOpen || !isMobile ? (isOpen ? "AVVA INVENTORY" : "AV") : ""}
+        </div>
+
+        <div style={styles.navContainer}>
+          {/* Main Navigation */}
+          <div style={styles.sectionTitle} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Main</div>
+          <NavLink to="/dashboard" style={getLinkStyle}>
+            <FaTachometerAlt style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Dashboard</span>
+          </NavLink>
+
+          {/* Inventory Management */}
+          <div style={styles.sectionTitle} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Inventory</div>
+          <NavLink to="/product" style={getLinkStyle}>
+            <FaBoxes style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Products</span>
+          </NavLink>
+
+          <NavLink to="/type" style={getLinkStyle}>
+            <FaTags style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Category</span>
+          </NavLink>
+
+          <NavLink to="/itemlist" style={getLinkStyle}>
+            <FaArrowDown style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Stock In</span>
+          </NavLink>
+
+          <NavLink to="/stockout" style={getLinkStyle}>
+            <FaArrowUp style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Stock Out</span>
+          </NavLink>
+
+          <NavLink to="/lowstock" style={getLinkStyle}>
+            <FaExclamationTriangle style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Low Stock</span>
+          </NavLink>
+
+          {/* Billing Section */}
+          <div style={styles.sectionTitle} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Billing</div>
+          <NavLink to="/bill" style={getLinkStyle}>
+            <FaFileInvoiceDollar style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Create Bill</span>
+          </NavLink>
+
+          <NavLink to="/billreport" style={getLinkStyle}>
+            <FaFileInvoice style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Visit Page</span>
+          </NavLink>
+
+          {/* Services Section */}
+          <div style={styles.sectionTitle} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Services</div>
+          <NavLink to="/service" style={getLinkStyle}>
+            <FaShoppingCart style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Create Service Bill</span>
+          </NavLink>
+
+          <NavLink to="/serviceBillView" style={getLinkStyle}>
+            <FaClipboardList style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Service Bill List</span>
+          </NavLink>
+
+          <NavLink to="/quotation" style={getLinkStyle}>
+            <FaClipboardList style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Quotations</span>
+          </NavLink>
+
+          <NavLink to="/invoice" style={getLinkStyle}>
+            <FaFileInvoiceDollar style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Invoices</span>
+          </NavLink>
+
+          {/* Supplier Section */}
+          <div style={styles.sectionTitle} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Suppliers</div>
+          <NavLink to="/supplier" style={getLinkStyle}>
+            <FaTruck style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Add Supplier</span>
+          </NavLink>
+
+          <NavLink to="/supplierList" style={getLinkStyle}>
+            <FaUsers style={styles.icon} />
+            <span style={styles.text} className={isMobile && !isOpen ? 'sidebar-mobile-hidden' : ''}>Supplier List</span>
+          </NavLink>
+        </div>
+
+        {/* Optional: Add version or footer */}
+        {isOpen && (
+          <div style={{
+            fontSize: "10px",
+            color: "#6b7280",
+            textAlign: "center",
+            padding: "16px 0 8px",
+            borderTop: "1px solid rgba(255,255,255,0.1)",
+            marginTop: "auto"
+          }}>
+            v1.0.0
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
